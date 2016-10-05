@@ -1,0 +1,198 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div>
+<div class="container-main">
+    <div class="title-main">
+        <h2>Standings</h2>
+    </div>
+    <div class="title-sub">
+        <h3>Add standings</h3>
+    </div>
+    {% include "message_display.html" %}
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="clearfix">
+            <div class="form-group col-lg-6 col-md-6  nopadding">
+                <label for="exampleInputFile">Select the League</label>
+                <select name="league" id="id_league">
+                <option value="Z">Select a brand</option>
+                    {% for league in league_list %}
+                    <option value="{{ league.league_name }}">{{ league.league_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <div class="form-group col-lg-12 col-md-12  nopadding">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>PLD</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>GF</th>
+                            <th>GA</th>
+                            <th>GD</th>
+                            <th>PTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select name="team" id="team" disabled="true">
+
+                                <option>Select a model</option>
+
+                                </select>
+                            </td>
+                            <td>
+                                {{ standingsform.pld }}
+                            </td>
+                            <td>
+                                {{ standingsform.w }}
+                            </td>
+                            <td>
+                                {{ standingsform.d }}
+                            </td>
+                            <td>
+                                {{ standingsform.l }}
+                            </td>
+                            <td>
+                                {{ standingsform.gf }}
+                            </td>
+                            <td>
+                                {{ standingsform.ga }}
+                            </td>
+                            <td>
+                                {{ standingsform.gd }}
+                            </td>
+                            <td>
+                                {{ standingsform.pts }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <div class="form-group col-lg-12 col-md-12  nopadding">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container-main">
+    <div class="title-sub">
+        <h3>News List</h3>
+    </div>
+    {% for league in leagues %}
+
+    <div class="showcase-box">
+        <div class="clearfix">
+            <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                <label for="exampleInputFile">League name</label>
+                <h4>{{ league.league_name }}</h4>
+            </div>
+            <div class="form-group  col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">
+                <label for="exampleInputFile">Edit</label>
+                <h4><a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h4>
+            </div>
+            <div class="form-group  col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">
+                <label for="exampleInputFile">Delete</label>
+                <h4><a href="{% url 'delete_standings' id=league.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></h4>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Team</th>
+                    <th>PLD</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>GD</th>
+                    <th>PTS</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for obj in standings %}
+            {% if obj.league_name_id == league.id %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ obj.team }}</td>
+                    <td>{{ obj.pld }}</td>
+                    <td>{{ obj.w }}</td>
+                    <td>{{ obj.d }}</td>
+                    <td>{{ obj.l }}</td>
+                    <td>{{ obj.gf }}</td>
+                    <td>{{ obj.ga }}</td>
+                    <td>{{ obj.gd }}</td>
+                    <td>{{ obj.pts }}</td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<script>
+
+$(document).ready(
+    function() {
+        $("select#league").change(function() {
+            if ($(this).val() == 'Z') {
+                $("select#team").html("<option>Select a model</option>");
+                $("select#team").attr('disabled', true);
+                }
+            else {
+                var url = "/league/" + $(this).val() + "/all_json_models";
+                var brand = $(this).val();
+
+                $.getJSON(url, function(models) {
+                    var options = '<option value="Z">Select a model</option>';
+                    for (var i = 0; i < models.length; i++) {
+                        options += '<option value="' + models[i].pk + '">' + models[i].fields['description'] + '</option>';
+                    }
+
+                $("select#team").html(options);
+
+                $("select#team option:first").attr('selected', 'selected');
+
+                $("select#team").attr('disabled', false);
+
+            });
+
+        }
+
+    });
+
+    $("select#team").change(function(vent) {
+
+        if ($(this).val() == -1) {
+
+        return;
+
+        }
+
+    myAwesomeFunctionToCallWhenAModelIsSelected();
+
+    });
+
+});
+
+}
+</script>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+
+<!--Form add container block-->
+<div class="container-main">
+    <div class="title-main">
+        <h2>Add Player</h2>
+    </div>
+    <div class="title-sub">
+        <h3>Add Team member</h3>
+    </div>
+        {% include "message_display.html" %}
+    <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+        <div class="clearfix">
+            <div class="form-group col-lg-4 col-md-4  nopadding">
+                <label for="exampleInputFile">Team name</label>
+                {{ playerform.team_name }}
+
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="form-group col-lg-4 col-md-4 nopadding gutter-padding">
+                <label for="exampleInputFile">Upload Image (size 447*365)</label>
+                <div class="fileUpload">
+                    <img src="{% static 'images/placeholder.jpg' %}" alt="" id="preview" style="max-width:100%;"/>
+                    {{ playerform.image_player }}
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix">
+            <div class="form-group col-lg-4 col-md-4  nopadding gutter-padding">
+                <label for="exampleInputFile">Player name</label>
+                {{ playerform.player_name }}
+            </div>
+            <div class="form-group col-lg-4 col-md-4  nopadding gutter-padding">
+                <label for="exampleInputFile">Playing position</label>
+                {{ playerform.player_position }}
+            </div>
+            <div class="form-group col-lg-4 col-md-4  nopadding gutter-padding">
+                <label for="exampleInputFile">Jersy number</label>
+                {{ playerform.jersy_number }}
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="form-group col-lg-4 col-md-4  nopadding gutter-padding">
+                <label for="exampleInputFile">Date of birth</label>
+                {{ playerform.dob }}
+            </div>
+            <div class="form-group col-lg-4 col-md-4  nopadding gutter-padding">
+                <label for="exampleInputFile">Born state</label>
+                {{ playerform.born_state }}
+            </div>
+            <div class="form-group col-lg-4 col-md-4  nopadding gutter-padding">
+                <label for="exampleInputFile">Nationality</label>
+                {{ playerform.nationality }}
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class=" col-lg-12 col-md-12  nopadding gutter-padding" >
+                <label for="exampleInputFile">About player</label>
+                {{ playerform.about_player }}
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="form-group nopadding gutter-padding" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--End Form container Block-->
+
+<!--List continer block-->
+
+<div class="container-main">
+
+    <div class="title-sub">
+        <h3>Team player list</h3>
+    </div>
+    <div class="showcase-box">
+            {% for team in teams %}
+        <div class="clearfix">
+            <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                <label for="exampleInputFile">Team name</label>
+                <h4>{{ team.team_name }}</h4>
+            </div>
+        </div>
+        <div id="news_wrapper" class="dataTables_wrapper no-footer">
+            <!--<div class="dataTables_length" id="news_length">-->
+                <!--<label>Show <select name="news_length" aria-controls="news" class="">-->
+                    <!--<option value="10">10</option>-->
+                    <!--<option value="25">25</option>-->
+                    <!--<option value="50">50</option>-->
+                    <!--<option value="100">100</option>-->
+                <!--</select> entries</label>-->
+            <!--</div>-->
+            <!--<div id="news_filter" class="dataTables_filter">-->
+                <!--<label>Search:<input type="search" class="" placeholder="" aria-controls="news"></label>-->
+            <!--</div>-->
+    <table class="table table-bordered dataTable no-footer" id="news" role="grid" aria-describedby="news_info">
+        <thead>
+            <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending" style="width: 7.77778px;">#</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Image: activate to sort column ascending" style="width: 63.7778px;">Image</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Player name: activate to sort column ascending" style="width: 183.778px;">Player name</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Playing position: activate to sort column ascending" style="width: 61.7778px;">Playing position</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Jersy number: activate to sort column ascending" style="width: 52.7778px;">Jersy number</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 21.7778px;">Age</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Born state: activate to sort column ascending" style="width: 75.7778px;">Born state</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Nationality: activate to sort column ascending" style="width: 60.7778px;">Nationality</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="About player: activate to sort column ascending" style="width: 92.7778px;">About player</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Edit: activate to sort column ascending" style="width: 22.7778px;">Edit</th>
+                <th class="sorting" tabindex="0" aria-controls="news" rowspan="1" colspan="1" aria-label="Delete: activate to sort column ascending" style="width: 34.7778px;">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for player in players %}
+        {% if player.team_name_id == team.id %}
+        <tr role="row" class="odd">
+                <td class="sorting_1">{{ forloop.counter }}</td>
+                <td><a href="/media/{{ player.image_player }}" class="fancybox" rel="one"><img src="/media/{{ player.image_player }}" style="width: 80px" alt=""></a></td>
+
+                <td class="title-table"><h5>{{ player.player_name }}</h5></td>
+                <td><h5>{{ player.player_position }}</h5></td>
+                <td><h5>{{ player.jersy_number }}</h5></td>
+                <td><h5>{{ player.dob }}</h5></td>
+                <td><h5>{{ player.born_state }}</h5></td>
+                <td><h5>{{ player.nationality }}</h5></td>
+                <td><h5>{{ player.about_player|truncatechars:60 }}</h5></td>
+                <td style="text-align: center;"><a href="{% url 'edit_player' id=player.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                <td style="text-align: center;"><a href="{% url 'delete_player' id=player.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+    <!--<div class="dataTables_info" id="news_info" role="status" aria-live="polite">Showing 1 to 1 of 1 entries</div>-->
+        <!--<div class="dataTables_paginate paging_simple_numbers" id="news_paginate">-->
+            <!--<a class="paginate_button previous disabled" aria-controls="news" data-dt-idx="0" tabindex="0" id="news_previous">Previous</a>-->
+            <!--<span><a class="paginate_button current" aria-controls="news" data-dt-idx="1" tabindex="0">1</a></span>-->
+            <!--<a class="paginate_button next disabled" aria-controls="news" data-dt-idx="2" tabindex="0" id="news_next">Next</a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    </div>
+
+</div>
+<!--End List container Block -->
+{% endblock content %}

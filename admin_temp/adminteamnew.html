@@ -1,0 +1,84 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<!--Form add container block-->
+<div class="container-main">
+    <div class="title-main">
+        <h2>Teams</h2>
+    </div>
+
+    <div class="title-sub">
+        <h3>Add Team</h3>
+    </div>
+        {% include "message_display.html" %}
+    <form action="." enctype="multipart/form-data" method="POST">{% csrf_token %}
+        <div id="TextBoxDiv1">
+            <div class="clearfix">
+                <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                    <label for="exampleInputFile">League name</label>
+                    {{ teamform.league_name }}
+                </div>
+                <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                    <label for="exampleInputFile">Enter the team name</label>
+                    {{ teamform.team_name }}
+                </div>
+                <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                    <label for="exampleInputFile">Enter the short name</label>
+                    {{ teamform.team_short_name }}
+                </div>
+                <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                    <label for="exampleInputFile">Upload Image (size 28*27 px)</label>
+                    <div class="fileUpload">
+                        <img src="{% static 'images/placeholder.jpg' %}" alt="" id="preview" style="max-width:30%;"/>
+                        {{ teamform.team_logo }}
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="form-group col-lg-12 col-md-12  nopadding">
+                    <button type="submit" class="btn btn-success">Add Team</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--End Form container Block-->
+
+<!--List continer block-->
+<div class="container-main">
+<div class="title-sub">
+    <h3>Teams List</h3>
+</div>
+<table class="table table-bordered" id="news">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Team name</th>
+            <th>Team short name</th>
+            <th>Logo</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for obj in teams %}
+        <tr>
+            <td style="text-align: center;">{{ forloop.counter }}</td>
+            <td><p>{{ obj.team_name }}</p></td>
+            <td>{{ obj.team_short_name }}</td>
+            <td><a href="/media/{{ obj.team_logo }}" class="fancybox" rel="one"><img src="/media/{{ obj.team_logo }}" style="width: 80px" alt="" /></a></td>
+            <!--<td>{{ obj. }}</td>-->
+            <td style="text-align: center;"><a href="{% url 'edit_team' id=obj.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+            <td style="text-align: center;"><a href="{% url 'delete_team' id=obj.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</div>
+<!--End List container Block -->
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% load static %}
+{% load staticfiles %}
+
+<html>
+    <head>
+        <!--head block-->
+        {% include 'adminhead.html' %}
+        <!--end head block-->
+    </head>
+    <body class="admin">
+        <section>
+            <div class="clearfix">
+                <!--left panel block-->
+                {% include 'adminleftpanel.html' %}
+                <!--end left panel block-->
+                <!--Content block-->
+                {% block content %}
+
+                {% endblock content %}
+                <!--End content block-->
+            </div>
+        </section>
+
+        <!--footer block-->
+        {% include 'adminfooter.html' %}
+        <!--end footer block-->
+    </body>
+</html>

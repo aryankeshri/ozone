@@ -1,0 +1,370 @@
+{% load static %}
+{% load staticfiles %}
+{% load embed_video_tags %}
+<header class="transition-fast">
+    <div class="header-social-links clearfix">
+        <div class="container-medium">
+            <nav class="clearfix">
+                <ul class="nav navbar-nav social-links">
+                    <li> <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a> </li>
+                    <li> <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a> </li>
+                    <li> <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+                    <li><a href="{% url 'event' %}" onclick="">EVENTS</a></li>
+                    <li><a href="" onclick="">AFFILIATIONS</a></li>
+                    <li><a href="{% url 'partners' %}" onclick="">PARTNERS</a></li>
+                    <li style="margin-left: 12px;"><a href="#join-now" class="button-small fancybox">JOIN THE ACADEMY</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="header-menu">
+        <div class="container">
+            <button aria-controls="bs-navbar" aria-expanded="false" class="collapsed navbar-toggle" data-target="#bs-navbar" data-toggle="collapse" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <div class="menu-bar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </div>
+                <div class="menu-text">Menu</div>
+            </button>
+            <div class="logo-holder">
+                <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="" /></a>
+            </div>
+            <div class="container-medium collapse navbar-collapse" id="bs-navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'home' %}" class="transition-fast">Home</a></li>
+                    <li><a href="{% url 'news'  %}" class="transition-fast">News</a></li>
+                    <li>
+                        <a href="{% url 'team' %}" class="transition-fast">Teams<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <div class="menu-dropdown hidden-xs">
+                            <div class="container">
+                                <div class="card clearfix">
+                                    <div class="col-lg-3 col-md-7 col-sm-3 hidden-xs">
+                                        <a href="{% url 'team' %}">
+                                            <div class="main-news-details">
+                                                <h5>OFCB</h5>
+                                                <div class="clearfix main-news-title">
+                                                    <img src="{% static 'images/photo-of-day/1.jpg' %}" width="100%" alt="" />
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-3 col-md-7 col-sm-3 hidden-xs">
+                                        <a href="{% url 'team_super_division' %}">
+                                            <div class="main-news-details">
+                                                <h5>Super Division</h5>
+                                                <div class="clearfix main-news-title">
+                                                    <img src="{% static 'images/photo-of-day/1.jpg' %}" width="100%" alt="" />
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-3 col-md-7 col-sm-3 hidden-xs">
+                                        <a href="{% url 'team_u17' %}">
+                                            <div class="main-news-details">
+                                                <h5>Under 17<sup>s</sup></h5>
+                                                <div class="clearfix main-news-title">
+                                                    <img src="{% static 'images/photo-of-day/1.jpg' %}" width="100%" alt="" />
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-3 col-md-7 col-sm-3 hidden-xs">
+                                        <a href="{% url 'team_u15' %}">
+                                            <div class="main-news-details">
+                                                <h5>Under 15<sup>s</sup></h5>
+                                                <div class="clearfix main-news-title">
+                                                    <img src="{% static 'images/photo-of-day/1.jpg' %}" width="100%" alt="" />
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'fixtures_results' %}" class="transition-fast">Fixtures & Results<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <div class="menu-dropdown hidden-xs">
+                            <div class="container">
+                                <div class="card">
+                                    <div class="clearfix">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
+                                            <div class="main-news-details">
+                                                <div class="score-menu">
+                                                    <h5>Recent Results</h5>
+                                                    {% for obj in recent_results %}
+                                                    <div class="clearfix match-menu-holder">
+                                                        <ul>
+                                                            <li>
+                                                                <p class="clearfix">
+                                                                    <span class="match-date pull-left">{{ obj.date }}</span>
+                                                                    <span class="match-date pull-right">{{ obj.league_name }}</span>
+                                                                </p>
+                                                                <div class="match-overview clearfix">
+
+                                                                    <span class="match-holder clearfix">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span class="team-name">{{ obj.team1 }}</span>
+                                                                                <span class="team-logo"><img src="/media/{{ obj.team1.team_logo }}" alt=""></span>
+                                                                            </li>
+                                                                            <li><span class="score"><span class="score1">{{ obj.score1 }}</span> - <span class="score2">{{ obj.score2 }}</span></span></li>
+                                                                            <li>
+                                                                                <span class="team-logo"><img src="/media/{{ obj.team2.team_logo }}" alt=""></span>
+                                                                                <span class="team-name">{{ obj.team2 }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </span>
+
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
+                                            <div class="main-news-details">
+                                                <div class="score-menu">
+                                                    <h5>Upcoming Matches</h5>
+                                                    {% for obj in upcomming_matches %}
+                                                    <div class="clearfix match-menu-holder">
+                                                        <ul>
+                                                            <li>
+                                                                <p class="clearfix">
+                                                                    <span class="match-date pull-left">{{ obj.date }}</span>
+                                                                    <span class="match-date pull-right">{{ obj.league_name }}</span>
+                                                                </p>
+                                                                <div class="match-overview clearfix">
+
+                                                                    <span class="match-holder clearfix">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span class="team-name">{{ obj.team1 }}</span>
+                                                                                <span class="team-logo"><img src="/media/{{ obj.team1.team_logo }}" alt=""></span>
+                                                                            </li>
+                                                                            <li><img src="{% static 'images/versus.png' %}" alt=""></li>
+                                                                            <li>
+                                                                                <span class="team-logo"><img src="/media/{{ obj.team2.team_logo }}" alt=""></span>
+                                                                                <span class="team-name">{{ obj.team2 }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 hidden-sm hidden-xs">
+                                            <div class="main-news-details">
+                                                <div class="score-menu">
+                                                    <h5>&nbsp;</h5>
+                                                    {% for obj in upcomming_matches2 %}
+                                                    <div class="clearfix match-menu-holder">
+                                                        <ul>
+                                                            <li>
+                                                                <p class="clearfix">
+                                                                    <span class="match-date pull-left">{{ obj.date }}</span>
+                                                                    <span class="match-date pull-right">{{ obj.league_name }}</span>
+                                                                </p>
+                                                                <div class="match-overview clearfix">
+
+                                                                    <span class="match-holder clearfix">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span class="team-name">{{ obj.team1 }}</span>
+                                                                                <span class="team-logo"><img src="/media/{{ obj.team1.team_logo }}" alt=""></span>
+                                                                            </li>
+                                                                            <li><img src="{% static 'images/versus.png' %}" alt=""></li>
+                                                                            <li>
+                                                                                <span class="team-logo"><img src="/media/{{ obj.team2.team_logo }}" alt=""></span>
+                                                                                <span class="team-name">{{ obj.team2 }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="button-holder">
+                                        <a href="{% url 'news' %}" class="button-small">View more news<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'grassroots_programs' %}" class="transition-fast">Grassroots program<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <div class="menu-dropdown hidden-xs">
+                            <div class="container">
+                                <div class="card clearfix">
+
+                                    <div class="col-lg-7 col-md-7 col-sm-6 hidden-xs nopadding gutter-padding">
+                                        <div class="main-news-details">
+                                            <h5>Our philiosophy</h5>
+                                            <div class="clearfix main-news-title">
+                                                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs nopadding gutter-padding">
+                                                    <div class="image-holder">
+                                                        <img src="{% static 'images/philosophy-menu.jpg' %}" width="100%" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9 col-md-9 col-sm-12 hidden-xs nopadding gutter-padding">
+                                                    <h6>&nbsp;</h6>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                                                    <a href="#join-now" class="button-small fancybox">Want to join?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-6 hidden-xs nopadding gutter-padding">
+                                        <div class="main-news-details">
+                                            <h5>From the coach</h5>
+                                            <div class="clearfix main-news-title coach-says">
+                                                <span><i class="fa fa-quote-left" aria-hidden="true"></i></span>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                                                <h6>Gurpreet Singh</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'oftv' %}" class="transition-fast">Ozone FCTV<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <div class="menu-dropdown hidden-xs">
+                            <div class="container">
+                                <div class="card">
+                                    <div class="clearfix">
+                                        {% for obj in header_ofctv %}
+                                        <div class="col-lg-4 col-md-7 col-sm-6 hidden-xs nopadding gutter-padding">
+                                            <div class="related-news-box">
+                                                <a href="{% url 'oftv_details' id=obj.id %}">
+                                                    {% video obj.video as my_video %}
+                                                    <div class="news-image">
+                                                        <img class="lazy" height="69px" data-original="{{ my_video.thumbnail }}" alt="" src="" style="display: inline;">
+                                                    </div>
+                                                    {% endvideo %}
+                                                    <div class="news-heading">
+                                                        <h4>{{ obj.title }}</h4>
+                                                        <h6>{{ obj.created|date:"d" }}th &nbsp;{{ obj.created|date:"M" }}, {{ obj.created|date:"Y" }}</h6>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <br>
+                                    <div class="button-holder">
+                                        <a href="{% url 'news' %}" class="button-small">View more news<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'club' %}" class="transition-fast">The Club<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <div class="menu-dropdown hidden-xs">
+                            <div class="container">
+                                <div class="card clearfix">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 hidden-xs nopadding gutter-padding">
+                                        <div class="main-news-details">
+                                            <h5>About us</h5>
+                                            <div class="clearfix main-news-title">
+                                                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs nopadding gutter-padding">
+                                                    <div class="image-holder">
+                                                        <img src="{% static 'images/about-menu.jpg' %}" width="100%" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9 col-md-9 col-sm-12 hidden-xs nopadding gutter-padding">
+                                                    <h6>&nbsp;</h6>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                                                    <div class="button-holder">
+                                                        <a href="{% url 'club' %}" class="button-small">View more news<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 hidden-xs nopadding gutter-padding">
+                                        <div class="main-news-details">
+                                            <h5>Join the club</h5>
+                                            <div class="clearfix main-news-title">
+                                                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs nopadding gutter-padding">
+                                                    <div class="image-holder">
+                                                        <img src="{% static 'images/joinclub-menu.jpg' %}" width="100%" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9 col-md-9 col-sm-12 hidden-xs nopadding gutter-padding">
+                                                    <h6>&nbsp;</h6>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                                                    <div class="button-holder">
+                                                        <a href="{% url 'club' %}" class="button-small">View more news<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="logo-holder right">
+                <a href="http://www.knvb.nl/" target="_blank"><img src="{% static 'images/knvb-logo.png' %}" alt="" /></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--popup-->
+<div class="popup-holder" id="join-now">
+<form onsubmit="return join_us_popup()" action="." method="POST">{% csrf_token %}
+    <div class="section-title">
+        <h3>Join the Academy</h3>
+        <p>Give us your details and we will get in touch with you</p>
+    </div>
+    <div class="card">
+        <div class="clearfix">
+            <div class="form-group">
+                <label for="p_name">Name</label>
+                {{ form.name }}
+                <div class="error-message" id="p_error_name"></div>
+            </div>
+            <div class="form-group">
+                <label for="p_age">Age</label>
+                {{ form.age }}
+                <div class="error-message" id="p_error_age"></div>
+            </div>
+            <div class="form-group">
+                <label for="p_city">City</label>
+                {{ form.city }}
+                <div class="error-message" id="p_error_city"></div>
+            </div>
+            <div class="form-group">
+                <label for="p_phone">Contact</label>
+                {{ form.contact }}
+                <div class="error-message"   id="p_error_phone"></div>
+            </div>
+            <button type="submit" class="btn-submit">Submit</button>
+        </div>
+    </div>
+</form>
+</div>
+
+

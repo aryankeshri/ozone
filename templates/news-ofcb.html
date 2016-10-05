@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="container">
+    <div class="menu-sub">
+        <ul>
+            <li><a href="{% url 'news'  %}" class="active">All</a></li>
+            <li><a href="{% url 'news_ofcd' %}">Ofcb</a></li>
+            <li><a href="{% url 'news_ozone_academy' %}">Ozone Academy</a></li>
+        </ul>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding gutter-padding">
+            {% for obj in latest %}
+            <a href="{{ obj.get_absolute_url }}">
+                <div class="image-holder photo-of-the-day">
+                    <img src="/media/{{ obj.image_news }}" style="width: 100%" alt="" />
+                    <div class="image-content-holder main-news">
+                        <h4>{{ obj.title }}</h4>
+                        <h6>{{ obj.publish }}<span class="news-author">BY: {{ obj.author }}</span></h6>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+            <div class="card">
+                <div class="clearfix">
+                    {% for news in newss %}
+                    <div class="related-news-box full-width">
+                        <a href="{{ news.get_absolute_url }}">
+                            <div class="news-image">
+                                <img src="/media/{{ news.image_news }}" alt="" />
+                            </div>
+                            <div class="news-heading details">
+                                <h4>{{ news.title }}</h4>
+                                <h6>{{ news.publish }}<span class="news-author">BY: {{ news.author }}</span></h6>
+                                <p>{{ news.body|truncatechars_html:60 }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-md-4 hidden-sm hidden-xs nopadding">
+            <section>
+                <div class="section-title">
+                    <h3>MOST READ</h3>
+                </div>
+                <div class="card">
+                    {% for obj in most_read %}
+                    <div class="clearfix">
+                        <div class="related-news-box full-width">
+                            <a href="{{ obj.get_absolute_url }}">
+                                <div class="news-image">
+                                    <img src="/media/{{ obj.image_news }}" alt="" />
+                                </div>
+                                <div class="news-heading">
+                                    <h4>{{ obj.title }}</h4>
+                                    <h6>{{ obj.publish }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            <section>
+                <div class="section-title">
+                    <h3>STANDINGS</h3>
+                </div>
+                <div class="card points-table-holder">
+                    <div class="clearfix">
+                        <div id="points-table-carosel" class="owl-carousel owl-theme">
+                            {% for obj in league %}
+                            <div class="item">
+                                <div class="tournament-name">
+                                    <h5>{{ obj.league_name }}</h5>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>POS</th>
+                                            <th>TEAM</th>
+                                            <th>PLD</th>
+                                            <th>PTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for standing in standings %}
+                                    {% if standing.league_id == obj.id %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ standing.team }}</td>
+                                            <td>{{ standing.pld }}</td>
+                                            <td>{{ standing.pts }}</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="customNavigation">
+                            <a class="prev-points-table"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            <a class="next-points-table"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="white-overlay"></div>
+                    </div>
+                    <div class="button-holder">
+                        <a href="{% url 'fixtures_results' %}" class="button-small">View full table<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="section-title">
+                    <h3>Tweets by OZONE FC</h3>
+                </div>
+                <div class="card">
+                    <div class="tweets-holder">
+                        <a class="twitter-timeline" href="https://twitter.com/fni">Tweets by fni</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+        <!--Patners block start-->
+            {% include 'partners.html' %}
+        <!--Patners block end-->
+
+{% endblock content %}

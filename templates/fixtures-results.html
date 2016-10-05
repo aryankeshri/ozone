@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="container">
+    <div class="menu-sub">
+        <ul>
+            <li><a href="{% url 'fixtures_results' %}" class="active">Academy </a></li>
+            <!--<li><a href="fixtures-results-u17.php">Under 17<sup>s</sup></a></li>-->
+            <!--<li><a href="fixtures-results-u15.php">Under 15<sup>s</sup> </a></li>-->
+            <!--<li><a href="fixtures-results-u10.php">Under 10<sup>s</sup></a></li>-->
+        </ul>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding gutter-padding">
+            <section>
+                <div class="tab-holder">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#fixtures" data-toggle="tab">Fixtures</a></li>
+                        <li><a href="#results" data-toggle="tab">Results</a></li>
+                        <li id="standings-tab"><a href="#standings" data-toggle="tab">standings</a></li>
+                    </ul>
+                    <div class="card points-table-holder">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="fixtures">
+                                <section>
+
+                                    <div class="section-title">
+                                        <h3 style="padding-top:10px;"></h3>
+                                    </div>
+                                    <div class="table-holder">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Match</th>
+                                                    <th>Results</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                {% for obj in fixtures %}
+                                                {% if obj.result == 0 %}
+                                                    <td>
+                                                        <span class="calander">
+                                                            <span class="day">{{ obj.date|date:"b" }}</span>
+                                                            <span class="date">{{ obj.date|date:"y" }}</span>
+                                                            <span class="day">{{ obj.date|date:"D" }}</span>
+                                                            <span class="date">{{ obj.date|date:"d" }}</span>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="match-holder">
+                                                            <ul>
+                                                                <li>
+                                                                    <span class="team-name">{{ obj.team1 }}</span>
+                                                                    <span class="team-logo"><img src="/media/{{ obj.team1.team_logo }}" alt=""></span>
+                                                                </li>
+                                                                <li><img src="{% static 'images/versus.png' %}" alt=""></li>
+                                                                <li>
+                                                                    <span class="team-logo"><img src="/media/{{ obj.team2.team_logo }}" alt=""></span>
+                                                                    <span class="team-name">{{ obj.team2 }}</span>
+                                                                </li>
+                                                            </ul>
+                                                        </span>
+                                                    </td>
+                                                    <td>--</td>
+                                                {% endif %}
+                                                {% endfor %}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </section>
+                            </div>
+                            <div class="tab-pane fade" id="results">
+                                <section>
+                                    <div class="section-title">
+                                        <h3 style="padding-top:10px;"></h3>
+                                    </div>
+                                    <div class="table-holder">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Match</th>
+                                                    <th>Results</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for obj in fixtures %}
+                                            {% if obj.result %}
+                                                <tr>
+                                                    <td>
+                                                        <span class="calander">
+                                                            <span class="day">{{ obj.date|date:"b" }}</span>
+                                                            <span class="date">{{ obj.date|date:"y" }}</span>
+                                                            <span class="day">{{ obj.date|date:"D" }}</span>
+                                                            <span class="date">{{ obj.date|date:"d" }}</span>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="match-holder">
+                                                            {% if obj.score1 > obj.score2 %}
+                                                            <ul>
+                                                                <li>
+                                                                    <span class="team-name">{{ obj.team1 }}</span>
+                                                                    <span class="team-logo"><img src="/media/{{ obj.team1.team_logo }}" alt="" /></span>
+                                                                </li>
+                                                                <li><img src="{% static 'images/versus.png' %}" alt="" /></li>
+                                                                <li class="lost">
+                                                                    <span class="team-logo"><img src="/media/{{ obj.team2.team_logo }}" alt="" /></span>
+                                                                    <span class="team-name">{{ obj.team2 }}</span>
+                                                                </li>
+                                                            </ul>
+                                                            {% elif obj.score1 == obj.score2 %}
+                                                            <ul>
+                                                                <li>
+                                                                    <span class="team-name">{{ obj.team1 }}</span>
+                                                                    <span class="team-logo"><img src="/media/{{ obj.team1.team_logo }}" alt="" /></span>
+                                                                </li>
+                                                                <li><img src="{% static 'images/versus.png' %}" alt="" /></li>
+                                                                <li>
+                                                                    <span class="team-logo"><img src="/media/{{ obj.team2.team_logo }}" alt="" /></span>
+                                                                    <span class="team-name">{{ obj.team2 }}</span>
+                                                                </li>
+                                                            </ul>
+                                                            {% else %}
+                                                            <ul>
+                                                                <li class="lost">
+                                                                    <span class="team-name">{{ obj.team1 }}</span>
+                                                                    <span class="team-logo"><img src="/media/{{ obj.team1.team_logo }}" alt="" /></span>
+                                                                </li>
+                                                                <li><img src="{% static 'images/versus.png' %}" alt="" /></li>
+                                                                <li>
+                                                                    <span class="team-logo"><img src="/media/{{ obj.team2.team_logo }}" alt="" /></span>
+                                                                    <span class="team-name">{{ obj.team2 }}</span>
+                                                                </li>
+                                                            </ul>
+                                                            {% endif %}
+                                                        </span>
+                                                    </td>
+                                                    <td>{{ obj.score1 }} - {{ obj.score2 }}</td>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="tab-pane fade" id="standings">
+                                <div class="clearfix">
+                                    <div class="section-title">
+                                        <h3>standings</h3>
+                                    </div>
+                                    <div id="points-table-carosel" class="owl-carousel owl-theme">
+                                        {% for obj in leagues %}
+                                        <div class="item">
+                                            <div class="tournament-name">
+                                                <h5>{{ obj.league_name }}</h5>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>POS</th>
+                                                        <th>TEAM</th>
+                                                        <th>PLD</th>
+                                                        <th>w</th>
+                                                        <th>d</th>
+                                                        <th>l</th>
+                                                        <th>gf</th>
+                                                        <th>ga</th>
+                                                        <th>gd</th>
+                                                        <th>PTS</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for standing in standings %}
+                                                {% if standing.league_id == obj.id %}
+                                                    <tr>
+                                                        <td>{{ forloop.counter }}</td>
+                                                        <td>{{ standing.team }}</td>
+                                                        <td>{{ standing.pld }}</td>
+                                                        <td>{{ standing.w }}</td>
+                                                        <td>{{ standing.d }}</td>
+                                                        <td>{{ standing.l }}</td>
+                                                        <td>{{ standing.gf }}</td>
+                                                        <td>{{ standing.ga }}</td>
+                                                        <td>{{ standing.gd }}</td>
+                                                        <td>{{ standing.pts }}</td>
+                                                    </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="customNavigation">
+                                        <a class="prev-points-table"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                                        <a class="next-points-table"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding">
+            <section>
+    <div class="section-title">
+        <h3>MOST READ</h3>
+    </div>
+    <div class="card">
+        {% for obj in most_read %}
+        <div class="clearfix">
+            <div class="related-news-box full-width">
+                <a href="{{ obj.get_absolute_url }}">
+                    <div class="news-image">
+                        <img src="/media/{{ obj.image_news }}" alt="" />
+                    </div>
+                    <div class="news-heading">
+                        <h4>{{ obj.title }}</h4>
+                        <h6>{{ obj.publish }}</h6>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+        </div>
+    </div>
+</section>
+
+    <!--Patners block start-->
+        {% include 'partners.html' %}
+    <!--Patners block end-->
+
+{% endblock content %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+ <section>
+    <div class="container">
+        <section>
+            <div class="image-holder small-banner">
+                <img class="lazy" data-original="{% static 'images/partners.jpg' %}" style="width: 100%" alt="" />
+                <div class="banner-title">
+                    <h3>About the club</h3>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding gutter-padding">
+                    <section>
+
+                        <div class="card">
+                            <div class="section-title">
+                                <h3>Our Vision</h3>
+                            </div>
+                            <div class="main-news-details">
+                                <p>Garbine Muguruza is in for a tough Wimbledon but is favourite to take over from Serena Williams at the head of the women's game, according to former American great Chris Evert.</p>
+
+                                <p>Spaniard Muguruza stunned Williams to win the French Open title earlier this month, having lost to the American in her grand slam final debut at Wimbledon last year.She will start as second seed when the championships start at the All England Club next week, when she will be hoping to emulate Williams and join a select group of players to claim a rare Roland Garros-Wimbledon double."I think she's going to have a tough Wimbledon," Evert, a three-times Wimbledon champion said in an ESPN conference call this week. "It's very hard to carry that momentum."</p>
+
+                                <p>Very few people have won the French and Wimbledon back to back, especially at that young of an age."She's come a long way. That will be a real curiosity for me if she can carry that momentum and confidence and do well, think about last year reaching the finals, or is she going to have a hard time re-setting, especially in dealing with expectations," added Evert, who won the French and Wimbledon double in 1974.</p>
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding">
+                    <section>
+
+                        <div class="card">
+                            <div class="section-title">
+                                <h3>Join the club</h3>
+                            </div>
+                            <div class="main-news-details">
+                                <p><strong>Garbine Muguruza is in for a tough Wimbledon but is favourite to take over from Serena Williams at the head of the women's game, according to former American great Chris Evert.</strong></p>
+
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <a class="btn-submit" href="{% url 'grassroots_programs' %}">Apply here</a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="card clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding gutter-padding">
+                    <section style="margin-bottom: 0;">
+                        <div class="section-title">
+                            <h3>Contat Details</h3>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding gutter-padding">
+                                <div class="main-news-details">
+
+                                    <address>
+                                        <strong>Corporate office</strong><br>
+                                        Ozonegroup football academy<br>
+                                        21/1, Wood Street, Beary's Horizon,<br>
+                                        Mezzanine floor,Ashok Nagar, <br>
+                                        Bangalore - 560 025
+                                    </address>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  nopadding gutter-padding">
+                                <div class="main-news-details">
+                                    <address>
+                                        <strong>&nbsp;</strong><br>
+                                        51/7-2, Rathna Avenue<br>
+                                        Off Richmond Road,<br>
+                                        Civil Station, <br>
+                                        Bangalore - 560 025
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding gutter-padding">
+                    <div class="map-holder">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9438657287865!2d77.61309235076381!3d12.97544219080842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16845b72a54f%3A0x3d9c4899043cede4!2sOzone+Group!5e0!3m2!1sen!2sin!4v1470410585744" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+    <!--Patners block start-->
+        {% include 'partners.html' %}
+    <!--Patners block end-->
+{% endblock content %}

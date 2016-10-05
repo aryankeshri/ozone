@@ -1,0 +1,50 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block title %}{{ title }} | Ozonefc Admin{% endblock %}
+
+{% block extrahead %}
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/favicon-apple-touch.png' %}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" sizes="32x32">
+{% endblock %}
+
+
+{% block extrastyle %}
+<style type="text/css">
+body .login {
+    background: #ffffff !important;
+}
+.login #header {
+    background: #ffffff;
+    padding: 3px 152px !important;
+    padding-top: 10px !important;
+}
+#header {
+    line-height: 0px;
+}
+
+h3 {
+    font-size: 17px !important;
+    color: #333 !important;
+}
+.submit-row input {
+    color: #ffffff !important;
+    background: #333 !important;
+}
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <div class="section-title">
+            <img src="{% static 'images/logo.png' %}" alt="" style="margin-bottom: 15px;">
+            <h3>OZONE FC</h3>
+        </div>
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

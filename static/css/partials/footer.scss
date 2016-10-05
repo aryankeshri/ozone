@@ -1,0 +1,52 @@
+/* Ozone FC footer */
+footer{
+    background-image: url('../images/footer-bg.jpg'); 
+    background-size:cover;
+    .footer-menu{
+        padding: 45px 0;
+        .title{
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(102, 102, 134, 0.33);
+            margin-bottom:25px;
+            h5{
+                font-family: $bold-font;
+                font-size: $medium-fontsize - 1;
+                color: $color-white;
+            }
+        }
+        p{
+            color: $social-media-color;
+        }
+        ul{
+            list-style: none;
+            display: inline-block;
+            margin-right: 30px;
+            li{
+                a{
+                    color: $color-grey;
+                    text-transform: uppercase;
+                    font-family: $bold-font;
+                    padding: 5px 0;
+                    display: block;
+                    &:hover{
+                        color: $color-white;
+                    }
+                }
+            }
+        }
+    }
+    .gutter-padding{
+        padding-right: 45px;
+    }
+    .copyright{
+        background-color: rgba(20,20,20,1);
+        padding:15px 0;
+        p{
+            color: $social-media-color;
+            text-align: center;
+            a{
+                color: $appiness;
+            }
+        }
+    }
+}

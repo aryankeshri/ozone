@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load embed_video_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="menu-sub">
+        <ul>
+            <li><a href="{% url 'oftv' %}" class="active">OFCB </a></li>
+            <!--<li><a href="ofcb-super-division.php">Super Division</a></li>-->
+            <!--<li><a href="ofcb-u17.php">Under 17<sup>s</sup></a></li>-->
+            <!--<li><a href="ofcb-u15.php">Under 15<sup>s</sup></a></li>-->
+        </ul>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding gutter-padding">
+            <section>
+                <div class="tab-holder">
+                    <ul class="filter nav nav-tabs" role="tablist">
+                        <li class="active all-btn"><a data-cat="all">All</a></li>
+                        <li><a data-cat="i-league">i-league </a></li>
+                        <li><a data-cat="champions-league">champions league</a></li>
+                        <li><a data-cat="interview">interview</a></li>
+                        <li><a data-cat="documentary">documentry</a></li>
+                    </ul>
+                    <div class="card points-table-holder">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="philosophy">
+                                <div class="ozone-tv">
+                                    <div class="">
+                                        <div class="clearfix video-filter-holder">
+                                            {% for obj in videos %}
+                                            {% video obj.video as my_video %}
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 filter-box {{ obj.type }}">
+                                                <div class="box-details video-holder">
+                                                    <a href="{% url 'oftv_details' id=obj.id %}">
+                                                        <img class="lazy" data-original="{{ my_video.thumbnail }}" style="width: 100%" alt="" />
+                                                        <div class="video-content-holder">
+                                                            <h4>{{ obj.title }}</h4>
+                                                            <h6>{{ obj.created }}</h6>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {% endvideo %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4 col-md-4 hidden-sm hidden-xs nopadding">
+            <section>
+                <div class="section-title">
+                    <h3>POPULAR VIDEOS</h3>
+                </div>
+                <div class="card">
+                    <div class="clearfix">
+                        {% for obj in videos %}
+                        {% video obj.video as my_video %}
+                        <div class="related-news-box full-width">
+                            <a href="{% url 'oftv_details' id=obj.id %}">
+                                <div class="news-image">
+                                    <img class="lazy" height="69px" data-original="{{ my_video.thumbnail }}" alt="" />
+                                </div>
+
+                                <div class="news-heading">
+                                    <h4>{{ obj.title }}</h4>
+                                    <h6>{{ obj.created|date:"d" }}th &nbsp;{{ obj.created|date:"M" }}, {{ obj.created|date:"Y" }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                        {% endvideo %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+
+    <!--Patners block start-->
+        {% include 'partners.html' %}
+    <!--Patners block end-->
+
+
+
+
+{% endblock content %}
+

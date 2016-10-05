@@ -1,0 +1,45 @@
+{% load static %}
+{% load staticfiles %}
+<div class="left-menu">
+    <div class="logo-holder">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="" style="margin-bottom: 5px;" />
+        </a>
+        <h3>Ozone FC</h3>
+    </div>
+    <div class="menu">
+        <ul>
+            <li>
+                <a href="{% url 'adminleague' %}">League</a>
+            </li>
+            <!--<li>-->
+                <!--<a href="{% url 'adminteam' %}">Team</a>-->
+            <!--</li>-->
+            <li>
+                <a href="{% url 'adminplayers' %}">Players</a>
+            </li>
+            <li>
+                <a href="{% url 'adminnews' %}">News</a>
+            </li>
+            <li>
+                <a href="{% url 'adminevents' %}">Events</a>
+            </li>
+            <li>
+                <a href="{% url 'adminfctv' %}">OFCTV</a>
+            </li>
+            <li>
+                <a href="{% url 'adminpod' %}">Photo of the day</a>
+            </li>
+            <li>
+                <a href="{% url 'adminfixtures' %}">Fixture & Results</a>
+            </li>
+            <li>
+                <a href="{% url 'adminstandings' %}">Standings</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>
+

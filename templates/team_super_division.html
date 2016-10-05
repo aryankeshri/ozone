@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="container">
+    <div class="menu-sub">
+        <ul>
+            <li><a href="{% url 'team' %}" class="active">OFCB</a></li>
+            <li><a href="{% url 'team_super_division' %}">Super Division</a></li>
+            <li><a href="{% url 'team_u17' %}">Under 17<sup>s</sup></a></li>
+            <li><a href="{% url 'team_u15' %}">Under 15<sup>s</sup></a></li>
+        </ul>
+    </div>
+</div>
+{% for obj in teams %}
+{% if obj.team_name == 'team-super-division' %}
+<section>
+    <div class="container">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding gutter-padding">
+            <section>
+                <div class="tab-holder">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#squad" data-toggle="tab">Squad</a></li>
+                        <li><a href="#honours" data-toggle="tab">Honours</a></li>
+                    </ul>
+                    <div class="card points-table-holder">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="squad">
+
+                                <section>
+                                    <div class="section-title">
+                                        <h3>Goalkeepers</h3>
+                                    </div>
+                                    <div class="team-players">
+                                        <ul>
+                                            {% for obj in players %}
+                                            {% if obj.player_position == 'goalkeeper' %}
+                                            <li>
+                                                <a href="{% url 'player' id=obj.id %} ">
+                                                    <div class="image-holder">
+                                                        <img src="/media/{{ obj.image_player }}" style="width:100%" alt="" />
+                                                        <span class="jersy-number-holder">
+                                                            <h5>{{ obj.jersy_number }}</h5>
+                                                        </span>
+                                                        <span class="player-name">{{ obj.player_name }}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </section>
+
+
+                                <section>
+                                    <div class="section-title">
+                                        <h3>Defenders</h3>
+                                    </div>
+                                    <div class="team-players">
+                                        <ul>
+                                            {% for obj in players %}
+                                            {% if obj.player_position == 'defender' %}
+                                            <li>
+                                                <a href="{% url 'player' id=obj.id %} ">
+                                                    <div class="image-holder">
+                                                        <img src="/media/{{ obj.image_player }}" style="width:100%" alt="" />
+                                                        <span class="jersy-number-holder">
+                                                            <h5>{{ obj.jersy_number }}</h5>
+                                                        </span>
+                                                        <span class="player-name">{{ obj.player_name }}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </section>
+
+
+                                <section>
+                                    <div class="section-title">
+                                        <h3>midfielders</h3>
+                                    </div>
+                                    <div class="team-players">
+                                        <ul>
+                                            {% for obj in players %}
+                                            {% if obj.player_position == 'midfielder' %}
+                                            <li>
+                                                <a href="{% url 'player' id=obj.id %} ">
+                                                    <div class="image-holder">
+                                                        <img src="/media/{{ obj.image_player }}" style="width:100%" alt="" />
+                                                        <span class="jersy-number-holder">
+                                                            <h5>{{ obj.jersy_number }}</h5>
+                                                        </span>
+                                                        <span class="player-name">{{ obj.player_name }}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </section>
+
+
+                                <section>
+                                    <div class="section-title">
+                                        <h3>forworders</h3>
+                                    </div>
+                                    <div class="team-players">
+                                        <ul>
+                                            {% for obj in players %}
+                                            {% if obj.player_position == 'forward' %}
+                                            <li>
+                                                <a href="{% url 'player' id=obj.id %} ">
+                                                    <div class="image-holder">
+                                                        <img src="/media/{{ obj.image_player }}" style="width:100%" alt="" />
+                                                        <span class="jersy-number-holder">
+                                                            <h5>{{ obj.jersy_number }}</h5>
+                                                        </span>
+                                                        <span class="player-name">{{ obj.player_name }}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </section>
+
+
+                                <section>
+                                    <div class="section-title">
+                                        <h3>allrounder</h3>
+                                    </div>
+                                    <div class="team-players">
+                                        <ul>
+                                            {% for obj in players %}
+                                            {% if obj.player_position == 'allrounder' %}
+                                            <li>
+                                                <a href="{% url 'player' id=obj.id %} ">
+                                                    <div class="image-holder">
+                                                        <img src="/media/{{ obj.image_player }}" style="width:100%" alt="" />
+                                                        <span class="jersy-number-holder">
+                                                            <h5>{{ obj.jersy_number }}</h5>
+                                                        </span>
+                                                        <span class="player-name">{{ obj.player_name }}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </section>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="honours">
+                                honours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4 col-md-4 hidden-sm hidden-xs nopadding">
+            <section>
+                <div class="section-title">
+                    <h3>STANDINGS</h3>
+                </div>
+                <div class="card points-table-holder">
+                    <div class="clearfix">
+                        <div id="points-table-carosel" class="owl-carousel owl-theme">
+                            {% for obj in league %}
+                            <div class="item">
+                                <div class="tournament-name">
+                                    <h5>{{ obj.league_name }}</h5>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>POS</th>
+                                            <th>TEAM</th>
+                                            <th>PLD</th>
+                                            <th>PTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for standing in standings %}
+                                    {% if standing.league_id == obj.id %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ standing.team }}</td>
+                                            <td>{{ standing.pld }}</td>
+                                            <td>{{ standing.pts }}</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="customNavigation">
+                            <a class="prev-points-table"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            <a class="next-points-table"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="white-overlay"></div>
+                    </div>
+                    <div class="button-holder">
+                        <a href="" class="button-small">View full table<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="section-title">
+                    <h3>MOST READ</h3>
+                </div>
+                <div class="card">
+                    {% for obj in most_read %}
+                    <div class="clearfix">
+                        <div class="related-news-box full-width">
+                            <a href="{{ obj.get_absolute_url }}">
+                                <div class="news-image">
+                                    <img src="/media/{{ obj.image_news }}" alt="" />
+                                </div>
+                                <div class="news-heading">
+                                    <h4>{{ obj.title }}</h4>
+                                    <h6>{{ obj.publish }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+
+        <!--Patners block start-->
+            {% include 'partners.html' %}
+        <!--Patners block end-->
+
+
+{% endif %}
+{% endfor %}
+{% endblock content %}
+

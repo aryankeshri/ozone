@@ -1,0 +1,115 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container-main">
+    <div class="title-main">
+        <h2>Fixtures</h2>
+    </div>
+
+    <div class="title-sub">
+        <h3>Add Fixtures & Results</h3>
+    </div>
+    {% include "message_display.html" %}
+<form method="POST" action="." enctype="multipart/form-data" >{% csrf_token %}
+    <div class="clearfix">
+        <div class="form-group col-lg-6 col-md-6  nopadding">
+            <label for="exampleInputFile">Enter the League name</label>
+            <div >
+            {{ fixturesform.league_name }}
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <div class="form-group col-lg-12 col-md-12  nopadding">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Team 1</th>
+                        <th>Team 2</th>
+                        <th>Score(Team 1)</th>
+                        <th>Score(Team 2)</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">1</td>
+                        <td>
+                           {{ fixturesform.date }}
+                        </td>
+                        <td>
+                            {{ fixturesform.team1 }}
+                        </td>
+                        <td class="title-table">
+                            {{ fixturesform.team2 }}
+                            {{ fixturesform.team2.errors}}
+                        </td>
+                        <td>
+                            {{ fixturesform.score1 }}
+                        </td>
+                        <td>
+                            {{ fixturesform.score2 }}
+                        </td>
+                        <td>
+                            {{ fixturesform.result }}
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="form-group col-lg-12 col-md-12  nopadding">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+</form>
+</div>
+
+<div class="container-main">
+    <div class="title-sub">
+        <h3>Score List</h3>
+    </div>
+
+    <table class="table table-bordered" id="news">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Score(Team 1)</th>
+                <th>Score(Team 2)</th>
+                <th>Result</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for obj in fixtures %}
+            <tr>
+                <td style="text-align: center;">{{ forloop.counter }}</td>
+                <td>{{ obj.date }}</td>
+                <td>{{ obj.team1 }}</td>
+                <td>{{ obj.team2 }}</td>
+                <td>{{ obj.score1 }}</td>
+                <td>{{ obj.score2 }}</td>
+                 <td>{{ obj.result }}</td>
+                <td style="text-align: center;"><a href="{% url 'edit_fixtures' id=obj.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                <td style="text-align: center;"><a href="{% url 'delete_fixtures' id=obj.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

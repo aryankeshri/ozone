@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="breadcrumb-holder">
+    <div class="container">
+            <div class="menu-sub">
+                <ul>
+                    <li><a href="{% url 'grassroots_programs' %}" class="active">Ozone Grassroots Program</a></li>
+                    <li><a href="{% url 'residential_academy' %}">Residential Academy</a></li>
+                    <li><a href="{% url 'bangalore_academy' %}">Bangalore Academy</a></li>
+                </ul>
+            </div>
+        </div>
+    <section>
+            <div class="container">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding gutter-padding">
+                    <section>
+                        <div class="tab-holder">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#philosophy" data-toggle="tab">Philosophy </a></li>
+                                <li><a href="#coach" data-toggle="tab">About the Coach</a></li>
+                                <li><a href="#knvb" data-toggle="tab">Association with KNVB</a></li>
+                                <li><a href="#rice_mms" data-toggle="tab">Association with RICE MMS</a></li>
+                            </ul>
+                            <div class="card points-table-holder">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="philosophy">
+                                        <div class="image-holder photo-of-the-day">
+                                            <img src="{% static 'images/join.jpg' %}" style="width: 100%" alt="" />
+                                        </div>
+                                        <div class="main-news-title">
+                                            <h4 style="margin-bottom: 0">Join the academy</h4>
+                                        </div>
+                                        <div class="main-news-details">
+                                            <h5>Introduction</h5>
+                                            <p>Garbine Muguruza is in for a tough Wimbledon but is favourite to take over from Serena Williams at the head of the women's game, according to former American great Chris Evert.</p>
+
+                                            <p>Spaniard Muguruza stunned Williams to win the French Open title earlier this month, having lost to the American in her grand slam final debut at Wimbledon last year.She will start as second seed when the championships start at the All England Club next week, when she will be hoping to emulate Williams and join a select group of players to claim a rare Roland Garros-Wimbledon double."I think she's going to have a tough Wimbledon," Evert, a three-times Wimbledon champion said in an ESPN conference call this week. "It's very hard to carry that momentum."</p>
+
+                                            <p>Very few people have won the French and Wimbledon back to back, especially at that young of an age."She's come a long way. That will be a real curiosity for me if she can carry that momentum and confidence and do well, think about last year reaching the finals, or is she going to have a hard time re-setting, especially in dealing with expectations," added Evert, who won the French and Wimbledon double in 1974.</p>
+
+                                            <p>Several players have threatened to knock 21-times grand slam singles champion Williams off her perch, but none have sustained their form long enough to succeed.Evert, however, believes with Williams now 34, Muguruza is poised to take over when her powers begin to fade."You've got to put your money on Muguruza because first of all, you have to have power in today's game," Evert said of the hard-hitting Muguruza."</p>
+
+                                            <p>When I look at the next three, I look at (Agnieszka) Radwanska, (Angelique) Kerber and (Simona) Halep. I don't think either of those three are going to end up number one."They don't have that sort of overwhelming power. Muguruza does have it, very much like Serena."Evert also picked out twice Wimbledon champion Petra Kvitova and fellow American Madison Keys as major threats at the year's third grand slam."It's about the power players, more than the consistent counter-punchers," she said</p>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="coach">
+                                        <div class="image-holder photo-of-the-day">
+                                            <img src="{% static 'images/coach.jpg' %}" style="width: 100%" alt="" />
+                                        </div>
+                                        <div class="main-news-title">
+                                            <h4>Emmanuel Adebayor</h4>
+                                            <h5><span class="news-author">Chief Coach and Technical Director</span></h5>
+                                        </div>
+                                        <div class="main-news-details">
+                                            <p>Hello Bangalore,</p>
+                                            <p>Garbine Muguruza is in for a tough Wimbledon but is favourite to take over from Serena Williams at the head of the women's game, according to former American great Chris Evert.</p>
+
+                                            <p>Spaniard Muguruza stunned Williams to win the French Open title earlier this month, having lost to the American in her grand slam final debut at Wimbledon last year.She will start as second seed when the championships start at the All England Club next week, when she will be hoping to emulate Williams and join a select group of players to claim a rare Roland Garros-Wimbledon double."I think she's going to have a tough Wimbledon," Evert, a three-times Wimbledon champion said in an ESPN conference call this week. "It's very hard to carry that momentum."</p>
+
+                                            <p>Very few people have won the French and Wimbledon back to back, especially at that young of an age."She's come a long way. That will be a real curiosity for me if she can carry that momentum and confidence and do well, think about last year reaching the finals, or is she going to have a hard time re-setting, especially in dealing with expectations," added Evert, who won the French and Wimbledon double in 1974.</p>
+
+                                            <p>Several players have threatened to knock 21-times grand slam singles champion Williams off her perch, but none have sustained their form long enough to succeed.Evert, however, believes with Williams now 34, Muguruza is poised to take over when her powers begin to fade."You've got to put your money on Muguruza because first of all, you have to have power in today's game," Evert said of the hard-hitting Muguruza."</p>
+
+                                            <p>When I look at the next three, I look at (Agnieszka) Radwanska, (Angelique) Kerber and (Simona) Halep. I don't think either of those three are going to end up number one."They don't have that sort of overwhelming power. Muguruza does have it, very much like Serena."Evert also picked out twice Wimbledon champion Petra Kvitova and fellow American Madison Keys as major threats at the year's third grand slam."It's about the power players, more than the consistent counter-punchers," she said</p>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="knvb">3</div>
+                                    <div class="tab-pane fade" id="rice_mms">4</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding">
+                    <section>
+                        <form onsubmit="return join_us()" method="post" action=".">{% csrf_token %}
+                            <div class="section-title">
+                                <h3>Join the Academy</h3>
+                                <p>Give us your details and we will get in touch with you</p>
+                            </div>
+                            <div class="card">
+                                <div class="clearfix">
+                                    <div class="form-group">
+                                        <label for="j_name">Name</label>
+                                        {{ form.name }}
+                                        <div class="error-message" id="error_name"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="j_age">Age</label>
+                                        {{ form.age }}
+                                        <div class="error-message" id="error_age"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="j_city">City</label>
+                                        {{ form.city }}
+                                        <div class="error-message" id="error_city"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="j_phone">Contact</label>
+                                        {{ form.contact }}
+                                        <div class="error-message"   id="error_phone"></div>
+                                    </div>
+                                    <button type="submit" class="btn-submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <!--Patners block start-->
+            {% include 'partners.html' %}
+        <!--Patners block end-->
+{% endblock content %}

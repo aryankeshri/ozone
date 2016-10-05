@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+
+
+<div class="container">
+    <div class="menu-sub">
+        <ul>
+            <li><a href="{% url 'news'  %}" class="active">All</a></li>
+            <li><a href="{% url 'news_ofcd' %}">Ofcb</a></li>
+            <li><a href="{% url 'news_ozone_academy' %}">Ozone Academy</a></li>
+        </ul>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 nopadding gutter-padding">
+            <section>
+                <div class="image-holder photo-of-the-day">
+                    <img src="/media/{{ instance.image_news }}" style="width: 100%" alt="" />
+                </div>
+                <div class="card">
+                    <div class="clearfix">
+                        <div class="main-news-title">
+                            <h4>{{ instance.title }}</h4>
+                            <h6>{{ instance.publish }}<span class="news-author">BY: {{ instance.author }}</span></h6>
+                        </div>
+                        <div class="main-news-details">
+                            {{ instance.body }}
+                            <div class="comments">
+                                <div id="disqus_thread"></div>
+                                <script>
+
+
+                                    (function () { // DON'T EDIT BELOW THIS LINE
+                                        var d = document, s = d.createElement('script');
+                                        s.src = '//ozonefc-com.disqus.com/embed.js';
+                                        s.setAttribute('data-timestamp', +new Date());
+                                        (d.head || d.body).appendChild(s);
+                                    })();
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="hidden-sm hidden-xs">
+                <div class="section-title">
+                    <h3>Related news</h3>
+                </div>
+                <div class="card">
+                    <div class="clearfix">
+                        {% for obj in newss %}
+                        {% if obj.id != instance.id %}
+                        <div class="related-news-box full-width">
+                            <a href="{{ obj.get_absolute_url }}">
+                                <div class="news-image">
+                                    <img src="/media/{{ obj.image_news }}" alt="" />
+                                </div>
+                                <div class="news-heading details">
+                                    <h4>{{ obj.title }}</h4>
+                                    <h6>{{ obj.publish }}<span class="news-author">BY: {{ obj.author }}</span></h6>
+                                    <p>{{ obj.body|truncatechars_html:60 }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4 col-md-4 hidden-sm hidden-xs nopadding">
+       <section>
+                <div class="section-title">
+                    <h3>MOST READ</h3>
+                </div>
+                <div class="card">
+                    {% for obj in most_read %}
+                    <div class="clearfix">
+                        <div class="related-news-box full-width">
+                            <a href="{{ obj.get_absolute_url }}">
+                                <div class="news-image">
+                                    <img src="/media/{{ obj.image_news }}" alt="" />
+                                </div>
+                                <div class="news-heading">
+                                    <h4>{{ obj.title }}</h4>
+                                    <h6>{{ obj.publish }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section>
+                <div class="section-title">
+                    <h3>Tweets by OZONE FC</h3>
+                </div>
+                <div class="card">
+                    <div class="tweets-holder">
+                        <a class="twitter-timeline" href="https://twitter.com/fni">Tweets by fni</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

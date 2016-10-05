@@ -1,0 +1,174 @@
+{% load static %}
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>OzoneFC</title>
+        {% include 'head.html' %}
+    </head>
+    <body class="">
+        <div id="preloader"></div>
+        <!--header block start-->
+            {% include 'header.html' %}
+        <!--header block end-->
+        <!--popup-->
+        <div class="popup-holder" id="join-now">
+            <form onsubmit="return join_us_popup()">
+                <div class="section-title">
+                    <h3>Join the Academy</h3>
+                    <p>Give us your details and we will get in touch with you</p>
+                </div>
+                <div class="card">
+                    <div class="clearfix">
+                        <div class="form-group">
+                            <label for="p_name">Name</label>
+                            <input type="text" class="form-control" id="p_name" placeholder="Type your name">
+                            <div class="error-message" id="p_error_name"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="p_age">Age</label>
+                            <input type="text" class="form-control" id="p_age" placeholder="Type your age">
+                            <div class="error-message" id="p_error_age"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="p_city">City</label>
+                            <input type="text" class="form-control" id="p_city" placeholder="Type your city">
+                            <div class="error-message" id="p_error_city"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="p_phone">Contact</label>
+                            <input type="tel" class="form-control" id="p_phone" placeholder="Type your number">
+                            <div class="error-message"   id="p_error_phone"></div>
+                        </div>
+                        <button type="submit" class="btn-submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--Content block-->
+            {% block content %}
+
+            {% endblock content %}
+        <!--End content block-->
+
+        <!--Footer block start-->
+            {% include 'footer.html' %}
+        <!--Footer block End-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="{% static 'plugin/bootstrap/javascripts/bootstrap.min.js' %}"></script>
+        <script src="{% static 'plugin/fancybox/jquery.fancybox.js' %}"></script>
+        <script type="text/javascript">
+        $('.fancybox').fancybox();
+        </script>
+        <script type="text/javascript" charset="utf-8">
+            $(function () {
+                $("img.lazy").lazyload();
+            });
+        </script>
+        <script src="{% static 'plugin/lazyload/js/jquery.lazyload.min.js' %}"></script>
+        <script src="{% static 'plugin/animate/js/wow.min.js' %}"></script>
+        <script> new WOW().init();</script>
+        <script>
+            if ($(window).width() < 768) {
+                $('*').removeClass('wow');
+            }
+        </script>
+        <script src="{% static 'plugin/owl-carosel/js/owl.carousel.js' %}"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
+        <script>
+            $(document).ready(function () {
+                var bannercarosel = $("#banner-carosel");
+                bannercarosel.owlCarousel({
+                    items: 1, //10 items above 1000px browser width
+                    itemsDesktop: [1000, 1], //5 items between 1000px and 901px
+                    itemsDesktopSmall: [900, 1], // betweem 900px and 601px
+                    itemsTablet: [600, 1], //2 items between 600 and 0
+                    itemsMobile: false, // itemsMobile disabled - inherit from itemsTablet option
+                    autoPlay: true
+                });
+
+                $(".next-banner").click(function () {
+                    bannercarosel.trigger('owl.next');
+                });
+                $(".prev-banner").click(function () {
+                    bannercarosel.trigger('owl.prev');
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                var pointstablecarosel = $("#points-table-carosel");
+                pointstablecarosel.owlCarousel({
+                    items: 1, //10 items above 1000px browser width
+                    itemsDesktop: [1000, 1], //5 items between 1000px and 901px
+                    itemsDesktopSmall: [900, 1], // betweem 900px and 601px
+                    itemsTablet: [600, 1], //2 items between 600 and 0
+                    itemsMobile: false, // itemsMobile disabled - inherit from itemsTablet option
+                    autoPlay: false
+                });
+
+                $(".next-points-table").click(function () {
+                    pointstablecarosel.trigger('owl.next');
+                });
+                $(".prev-points-table").click(function () {
+                    pointstablecarosel.trigger('owl.prev');
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                var clientscarosel = $("#clients-carosel");
+                clientscarosel.owlCarousel({
+                    items: 7, //10 items above 1000px browser width
+                    itemsDesktop: [1000, 7], //5 items between 1000px and 901px
+                    itemsDesktopSmall: [900, 5], // betweem 900px and 601px
+                    itemsTablet: [600, 2], //2 items between 600 and 0
+                    itemsMobile: false, // itemsMobile disabled - inherit from itemsTablet option
+                    autoPlay: false
+                });
+
+                $(".next-clients").click(function () {
+                    clientscarosel.trigger('owl.next');
+                });
+                $(".prev-clients").click(function () {
+                    clientscarosel.trigger('owl.prev');
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                var clientscarosel = $("#ozonetv-carosel");
+                clientscarosel.owlCarousel({
+                    items: 4, //10 items above 1000px browser width
+                    itemsDesktop: [1000, 4], //5 items between 1000px and 901px
+                    itemsDesktopSmall: [900, 2], // betweem 900px and 601px
+                    itemsTablet: [600, 1], //2 items between 600 and 0
+                    itemsMobile: false, // itemsMobile disabled - inherit from itemsTablet option
+                    autoPlay: false
+                });
+
+                $(".next-ozonetv").click(function () {
+                    clientscarosel.trigger('owl.next');
+                });
+                $(".prev-ozonetv").click(function () {
+                    clientscarosel.trigger('owl.prev');
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(".filter li").click(function () {
+                $(".filter li").removeClass("active");
+                $(this).addClass("active");
+                if ($(this).hasClass("all-btn")) {
+                    $(".video-filter-holder").children(".filter-box").fadeIn("slow");
+                } else {
+                    var filter = $(this).find("a").attr("data-cat");
+                    $(".video-filter-holder").children(".filter-box").hide();
+                    $("." + filter).fadeIn("slow");
+                }
+            });
+        </script>
+    </body>
+</html>

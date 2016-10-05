@@ -1,0 +1,92 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load embed_video_tags %}
+{% block content %}
+
+
+<!--Form add container block-->
+
+<div class="container-main">
+    <div class="title-main">
+        <h2>OFCTV</h2>
+    </div>
+
+    <div class="title-sub">
+        <h3>Add Ofctv</h3>
+    </div>
+     {% include "message_display.html" %}
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="form-holder">
+            <div class="clearfix">
+                <div class="col-lg-4 col-md-4  nopadding gutter-padding">
+                    <label for="exampleInputFile">Title(80 Characters)</label>
+                    {{ fctvform.title }}
+                </div>
+            </div>
+            <div class="form-holder" >
+                <div class="col-lg-12 col-md-12 nopadding gutter-padding">
+                    <label for="exampleInputFile">Related to</label>
+                    {{ fctvform.type }}
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="col-lg-8 col-md-8  nopadding gutter-padding" style="margin: 0px  0px 0px;width: 742px;height: 110px;">
+                    <label for="exampleInputFile">URL of video</label>
+                    {{ fctvform.video }}
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--End Form container Block-->
+
+<!--List continer block-->
+
+<div class="container-main">
+    <div class="title-sub">
+        <h3>Videos List</h3>
+    </div>
+
+    <table class="table table-bordered" id="news">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>URL</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in videos %}
+            <tr>
+                <td style="text-align: center;">{{ forloop.counter }}</td>
+                <td class="title-table">
+                    <h5>{{ obj.title }}</h5>
+                </td>
+                <td class="title-table">
+                    <h5>{{ obj.type }}</h5>
+                </td>
+                {% video obj.video as my_video %}
+                <td class="title-table">
+                    {{ my_video.url }}
+                </td>
+                {% endvideo %}
+                <td style="text-align: center;"><a href="{% url 'edit_fctv' id=obj.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                <td style="text-align: center;"><a href="{% url 'delete_fctv' id=obj.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--End List container Block -->
+
+{% endblock %}

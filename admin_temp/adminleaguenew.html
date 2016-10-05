@@ -1,0 +1,167 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<!--Form add container block-->
+<div class="bs-example">
+    <div class="panel-group" id="accordion">
+<!--Form add League container block-->
+        <div class="container-main panel panel-default">
+            <div class="title-main">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><h2>Add Leagues</h2></a>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <!--<div class="title-sub">-->
+                        <!--<h3>Add leagues</h3>-->
+                    <!--</div>-->
+                    {% include "message_display.html" %}
+                    <form action="." method="POST" enctype="multipart/form-data">{% csrf_token %}
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-3 nopadding gutter-padding">
+                                <label for="exampleInputFile">Enter the League name</label>
+                                {{ form.league_name }}
+                            </div>
+                            <div class="col-lg-2 col-md-2 nopadding gutter-padding" id="league_start">
+                                <label for="exampleInputFile">League start Date</label>
+                                 {{ form.start_date }}
+                            </div>
+                            <div class="col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">
+                                <label for="exampleInputFile">League end Date</label>
+                                {{ form.end_date }}
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-12 col-md-12  nopadding" style="margin-top:12px;">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="hidden" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+<!--End  League Form container Block-->
+
+<!--Form add Team container block-->
+        <div class="container-main panel panel-default">
+            <div class="title-main">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><h2>Add Teams</h2></a>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                <!--<div class="title-sub">-->
+                    <!--<h3>Add Team</h3>-->
+                <!--</div>-->
+                    {% include "message_display.html" %}
+                <form action="." enctype="multipart/form-data" method="POST">{% csrf_token %}
+                    <div id="TextBoxDiv1">
+                        <div class="clearfix">
+                            <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                                <label for="exampleInputFile">League name</label>
+                                {{ teamform.league_name }}
+                            </div>
+                            <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                                <label for="exampleInputFile">Enter the team name</label>
+                                {{ teamform.team_name }}
+                            </div>
+                            <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                                <label for="exampleInputFile">Enter the short name</label>
+                                {{ teamform.team_short_name }}
+                            </div>
+                            <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                                <label for="exampleInputFile">Upload Image (size 28*27 px)</label>
+                                <div class="fileUpload">
+                                    <img src="{% static 'images/placeholder.jpg' %}" alt="" id="preview" style="max-width:30%;"/>
+                                    {{ teamform.team_logo }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="form-group col-lg-12 col-md-12  nopadding">
+                                <button type="submit" class="btn btn-success">Add Team</button>
+                                <button type="reset" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+<!--End  team Form container Block-->
+    </div>
+</div>
+<!--End Form container Block-->
+
+
+<!--List continer block-->
+<div class="container-main">
+    <div class="title-sub">
+        <h3>Leagues</h3>
+    </div>
+        {% for league in leagues %}
+    <div class="showcase-box">
+        <div class="clearfix">
+            <div class="col-lg-3 col-md-3 nopadding gutter-padding">
+                <label for="exampleInputFile">League name</label>
+                <h4>{{ league.league_name }}</h4>
+            </div>
+            <div class="col-lg-2 col-md-2 nopadding gutter-padding" id="league_start">
+                <label for="exampleInputFile">League start Date</label>
+                <h4>{{ league.start_date }}</h4>
+            </div>
+            <div class="col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">
+                <label for="exampleInputFile">League end Date</label>
+                <h4>{{ league.end_date }}</h4>
+            </div>
+            <div class="col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">
+                <label for="exampleInputFile">Edit League</label>
+                <h4><a href="{% url 'edit_league' id=league.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h4>
+            </div>
+            <div class="col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">
+                <label for="exampleInputFile">Delete League</label>
+                <h4><a href="{% url 'delete_league' id=league.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></h4>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+
+                    <th>Team name</th>
+                    <th>Short name</th>
+                    <th>Logo</th>
+                    <th>Edit Team</th>
+                    <th>Delete Team</th>
+
+                </tr>
+            </thead>
+            {% for team in teams %}
+            {% if team.league_name_id == league.id %}
+            <tbody>
+                <tr>
+
+                    <td>{{ team.team_name }}</td>
+                    <td>{{ team.team_short_name }}</td>
+                    <td><a href="/media/{{ team.team_logo }}" class="fancybox" rel="one"><img src="/media/{{ team.team_logo }}" style="width: 80px" alt="" /></a></td>
+                    <td style="text-align: center;"><a href="{% url 'edit_team' id=team.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                    <td style="text-align: center;"><a href="{% url 'delete_team' id=team.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+
+                </tr>
+            </tbody>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+<!--End List container Block -->
+
+
+
+
+
+

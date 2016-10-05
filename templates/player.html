@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="container">
+    <div class="menu-sub">
+        <ul>
+            <li><a href="{% url 'team' %}" class="active">OFCB</a></li>
+            <li><a href="{% url 'team_super_division' %}">Super Division</a></li>
+            <li><a href="{% url 'team_u17' %}">Under 17<sup>s</sup></a></li>
+            <li><a href="{% url 'team_u15' %}">Under 15<sup>s</sup></a></li>
+        </ul>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <div class="card ozone-tv">
+            <div class="player-holder">
+                <div class="clearfix">
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 nopadding gutter-padding">
+                        <div class="image-holder">
+                            <img src="/media/{{ instance.image_player }}" style="width:100%" alt="" />
+                            <span class="jersy-number-holder">
+                                <h6>Jersy no:</h6>
+                                <h5>{{ instance.jersy_number }}</h5>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 nopadding">
+                        <div class="main-news-title">
+                            <h4>{{ instance.player_name }}</h4>
+                            <h5><span class="news-author">{{ instance.player_position }}</span></h5>
+                        </div>
+                        <div class="details-table">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="label-key">DOB</span>
+                                            <span class="value">{{ instance.dob }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="label-key">BORN</span>
+                                            <span class="value">{{ instance.born_state }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="label-key">NATIONALITY</span>
+                                            <span class="value">{{ instance.nationality }}</span>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="main-news-details">
+                            {{ instance.about_player }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="clearfix">
+            <div class="section-title">
+                <h3>Team mates</h3>
+            </div>
+            <div class=" card players-carosel">
+                <div id="players-carosel" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                    <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 2562px; left: 0px; display: block;">
+                        {% for obj in team_mates %}
+                        {% if obj.id != instance.id %}
+                        <div class="owl-item" style="width: 183px;">
+                            <div class="item">
+                                <a href="{% url 'player' id=obj.id %}">
+                                    <div class="image-holder">
+                                        <img src="/media/{{ obj.image_player }}" style="width:100%" alt="">
+                                        <span class="jersy-number-holder">
+                                            <h5>{{ obj.jersy_number }}</h5>
+                                        </span>
+                                        <span class="player-name">{{ obj.player_name }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="owl-controls clickable" style="display: block;"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div></div>
+                <div class="customNavigation">
+                    <a class="prev-players"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                    <a class="next-players"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

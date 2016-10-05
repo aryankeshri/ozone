@@ -1,0 +1,100 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+<!--Form add container block-->
+<div class="container-main">
+    <div class="title-main">
+        <h2>News</h2>
+    </div>
+    <div class="title-sub">
+        <h3>Add News</h3>
+    </div>
+        {% include "message_display.html" %}
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <div class="form-holder">
+        <div class="clearfix">
+            <div class="form-group col-lg-4 col-md-4 nopadding gutter-padding">
+                <label for="exampleInputFile">Upload Image (size 1160*550px)</label>
+                <div class="fileUpload">
+                    <img src="{% static 'images/placeholder.jpg' %}" alt="" id="preview" style="max-width:100%;">
+                    {{ newsform.image_news }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-12 col-md-12  nopadding">
+            <label for="exampleInputFile">Title(80 Characters)</label>
+            {{ newsform.title }}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Content</label>
+            {{ newsform.body }}
+        </div>
+        <div class="clearfix">
+            <div class="form-group  col-lg-3 col-md-3 nopadding gutter-padding" id="news_published">
+                <label for="exampleInputFile">Date</label>
+                {{ newsform.publish }}
+            </div>
+            <div class="form-group  col-lg-3 col-md-3 nopadding gutter-padding">
+                <label for="exampleInputFile">Author name(If any)</label>
+                {{ newsform.author }}
+            </div>
+            <div class="form-group  col-lg-3 col-md-3 nopadding">
+                <label for="exampleInputFile">Publish/Un-publish</label>
+                {{ newsform.status }}
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+<!--End Form container Block-->
+
+<!--List continer block-->
+<div class="container-main">
+<div class="title-sub">
+    <h3>News List</h3>
+</div>
+<table class="table table-bordered" id="news">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Image</th>
+            <!--<th>Image 2</th>-->
+            <th>Title</th>
+            <th>Content</th>
+            <th>Date</th>
+            <th>Author Name</th>
+            <th>Publish/ Un-publish</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for obj in news %}
+        <tr>
+            <td style="text-align: center;">{{ forloop.counter }}</td>
+            <td><a href="/media/{{ obj.image_news }}" class="fancybox" rel="one"><img src="/media/{{ obj.image_news }}" style="width: 80px" alt="" /></a></td>
+            <td class="title-table">
+                <h5>{{ obj.title }}</h5>
+            </td>
+            <td class="content-table"><h5>{{ obj.body|truncatechars:30 }}</h5></td>
+            <td>{{ obj.publish }}</td>
+            <td>{{ obj.author }}</td>
+            <td>{{ obj.status }}</td>
+            <td style="text-align: center;"><a href="{% url 'edit_news' id=obj.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+            <td style="text-align: center;"><a href="{% url 'delete_news' id=obj.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</div>
+<!--End List container Block -->
+
+{% endblock content %}

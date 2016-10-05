@@ -1,0 +1,59 @@
+{% load static %}
+{% load staticfiles %}
+
+<footer>
+    <div class="footer-menu hidden-sm hidden-xs">
+        <div class="container">
+            <div class="clearfix">
+                <div class="col-lg-4 col-md-4 hidden-sm hidden-xs nopadding gutter-padding">
+                    <div class="title">
+                        <h5>About Ozone FC</h5>
+                    </div>
+                    <p>Ozone Football Academy, the sports arm of Ozonegroup, a leading Bangalore based real estate rganization; and the Dutch Football Association (KNVB) invite all young footballers under the age of 10 and 12 to participate in once in lifetime opportunity.</p>
+                </div>
+                <div class="col-lg-4 col-md-4 nopadding gutter-padding">
+                    <div class="title">
+                        <h5>Quick links</h5>
+                    </div>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'news' %}">News</a></li>
+                        <li><a href="{% url 'fixtures_results' %}">Fixtures & Results</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="{% url 'team' %}">Teams</a></li>
+                        <li><a href="{% url 'grassroots_programs' %}">Grassroots program</a></li>
+                        <li><a href="{% url 'oftv' %}">Ozone FCTV</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-2 nopadding gutter-padding">
+                    <div class="title">
+                        <h5>Additional info</h5>
+                    </div>
+                    <ul>
+                        <li><a href="{% url 'event' %}">EVENTS</a></li>
+                        <li><a href="">AFFILIATIONS</a></li>
+                        <li><a href="{% url 'partners'  %}">PARTNERS</a></li>
+                        <li><a href="#join-now" class="fancybox">JOIN THE ACADEMY</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-2 nopadding">
+                    <div class="title">
+                        <h5>Social</h5>
+                    </div>
+                    <ul>
+                        <li><a href="javascript:;">Facebook</a></li>
+                        <li><a href="javascript:;">Twitter</a></li>
+                        <li><a href="javascript:;">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2014-
+            <script type="text/javascript" language="JavaScript">
+                document.write((new Date()).getFullYear());
+            </script>. All rights reserved. Web presence by <a href="http://www.appinessworld.com/index.html" target="_blank">appiness</a> </p>
+    </div>
+</footer>

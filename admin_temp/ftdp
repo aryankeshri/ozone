@@ -1,0 +1,310 @@
+!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Select a Date Range</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var dateFormat = "mm/dd/yy",
+      from = $( "#from" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+
+      return date;
+    }
+  } );
+  </script>
+</head>
+<body>
+
+<label for="from">From</label>
+<input type="text" id="from" name="from">
+<label for="to">to</label>
+<input type="text" id="to" name="to">
+
+
+</body>
+</html>
+
+
+
+
+#models.py
+
+class VehicleBrand(models.Model):
+
+description = models.CharField(max_length=100)
+
+code = models.SlugField(primary_key=True)
+
+
+
+class VehicleModel(models.Model):
+
+description = models.CharField(max_length=100)
+
+code = models.SlugField(primary_key=True)
+
+brand = models.ForeignKey(VehicleBrand)
+
+
+
+Let’s write a templatetag that will be included in our templates:
+
+
+
+#templatetags.py
+
+from models import VehicleBrand
+
+
+
+from django import template
+
+
+
+register = template.Library()
+
+
+
+@register.inclusion_tag("brand_model_select.html")
+
+def brand_model_select():
+
+brand_list = VehicleBrand.objects.all()
+
+return {'brand_list' : brand_list}
+
+
+
+As you can see, the templatetag requires a support html template, defined as follow:
+
+
+
+<!-- brand_model_select.html -->
+
+<form action="" method="get" accept-charset="utf-8">
+
+<select name="brand" id="brand">
+
+<option value="Z">Select a brand</option>
+
+{% for brand in brand_list %}
+
+<option value="{{ brand.code}}">{{ brand.description }}</option>
+
+{% endfor %}
+
+</select>
+
+<select name="model" id="model" disabled="true">
+
+<option>Select a model</option>
+
+</select>
+
+</form>
+
+<script>
+
+$(document).ready(
+
+function() {
+
+$("select#brand").change(function() {
+
+if ($(this).val() == 'Z') {
+
+$("select#model").html("<option>Select a model</option>");
+
+$("select#model").attr('disabled', true);
+
+}
+
+else {
+
+var url = "/brand/" + $(this).val() + "/all_json_models";
+
+var brand = $(this).val();
+
+$.getJSON(url, function(models) {
+
+var options = '<option value="Z">Select a model</option>';
+
+for (var i = 0; i < models.length; i++) {
+
+options += '<option value="' + models[i].pk + '">' + models[i].fields['description'] + '</option>';
+
+}
+
+$("select#model").html(options);
+
+$("select#model option:first").attr('selected', 'selected');
+
+$("select#model").attr('disabled', false);
+
+});
+
+}
+
+});
+
+
+
+
+
+$("select#model").change(function(vent) {
+
+if ($(this).val() == -1) {
+
+return;
+
+}
+
+myAwesomeFunctionToCallWhenAModelIsSelected();
+
+});
+
+});
+
+}
+
+
+
+</script>
+
+
+
+Please note that once a brand is selected, the following url will be invoked via Ajax request:
+
+/brand/”selected_brand_code”/all_json_models
+
+
+
+then we need to define a view to handle this request:
+
+
+
+#views.py
+
+def all_json_models(request, brand):
+
+current_brand = VehicleBrand.objects.get(code=brand)
+
+models = VehicleModel.objects.all().filter(brand=current_brand)
+
+json_models = serializers.serialize("json", models)
+
+return HttpResponse(json_models, mimetype="application/javascript")
+
+
+
+and in urls.py:
+
+
+
+#urls.py
+
+...
+
+
+
+    object = form.save(commit=False)
+    t = handle_uploaded_file(request.FILES['file'])
+    object.field.save(t[0], t[1])
+
+
+{{ date_obj|date:"F" }} # December
+{{ date_obj|date:"Y" }} # 2014
+
+
+                                    <!--<h1>{{ i }}</h1>-->
+                                    <!--{% for obj in fixtures %}-->
+                                    <!--{% if obj.result == 0 %}-->
+                                    <!--{% if obj.date|date:"F" == i %}-->
+                                    <!---->
+                                        <!--<h3>{{ obj.date|date:"F" }}&nbsp;{{ obj.date|date:"Y" }}</h3>-->
+                                    <!--</div>-->
+
+
+                                              <!--{% endif %}-->
+                                    <!--{% endif %}-->
+                                    <!--{% endfor %}-->
+
+
+
+<div class="bs-example">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. What is HTML?</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <p>HTML stands for HyperText Markup Language. HTML is the main markup language for describing the structure of Web pages. <a href="http://www.tutorialrepublic.com/html-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. What is Bootstrap?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>Bootstrap is a powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. What is CSS?</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>CSS stands for Cascading Style Sheet. CSS allows you to specify various style properties for a given HTML element such as colors, backgrounds, fonts etc. <a href="http://www.tutorialrepublic.com/css-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+                             {% for obj in fixtures %}
+                                    {% if obj.result %}
+                                    {{ obj.date|date:"d" }}&nbsp;{{ obj.date|date:"F" }}&nbsp;{{ obj.date|date:"Y" }}
+                                                                        {% endif %}
+                                    {% endfor %}

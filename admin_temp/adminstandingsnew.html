@@ -1,0 +1,153 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container-main">
+    <div class="title-main">
+        <h2>Standings</h2>
+    </div>
+    <div class="title-sub">
+        <h3>Add standings</h3>
+    </div>
+    {% include "message_display.html" %}
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="clearfix">
+            <div class="form-group col-lg-6 col-md-6  nopadding">
+                <label for="exampleInputFile">Select the League</label>
+                {{ standingsform.league }}
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <div class="form-group col-lg-12 col-md-12  nopadding">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>PLD</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>GF</th>
+                            <th>GA</th>
+                            <th>GD</th>
+                            <th>PTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {{ standingsform.team }}
+                            </td>
+                            <td>
+                                {{ standingsform.pld }}
+                            </td>
+                            <td>
+                                {{ standingsform.w }}
+                            </td>
+                            <td>
+                                {{ standingsform.d }}
+                            </td>
+                            <td>
+                                {{ standingsform.l }}
+                            </td>
+                            <td>
+                                {{ standingsform.gf }}
+                            </td>
+                            <td>
+                                {{ standingsform.ga }}
+                            </td>
+                            <td>
+                                {{ standingsform.gd }}
+                            </td>
+                            <td>
+                                {{ standingsform.pts }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <div class="form-group col-lg-12 col-md-12  nopadding">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container-main">
+    <div class="title-sub">
+        <h3>News List</h3>
+    </div>
+    {% for league in leagues %}
+
+    <div class="showcase-box">
+        <div class="clearfix">
+            <div class="form-group col-lg-3 col-md-3 nopadding gutter-padding">
+                <label for="exampleInputFile">League name</label>
+                <h4>{{ league.league_name }}</h4>
+            </div>
+            <!--<div class="form-group  col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">-->
+                <!--<label for="exampleInputFile">Edit</label>-->
+                <!--<h4><a href="{% url 'edit_standings' id=league.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h4>-->
+            <!--</div>-->
+            <!--<div class="form-group  col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">-->
+                <!--&lt;!&ndash;<label for="exampleInputFile">Delete</label>&ndash;&gt;-->
+                <!---->
+            <!--</div>-->
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>PLD</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>GD</th>
+                    <th>PTS</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for obj in standings %}
+            {% if obj.league_id == league.id %}
+                <tr>
+                    <td>{{ obj.team }}</td>
+                    <td>{{ obj.pld }}</td>
+                    <td>{{ obj.w }}</td>
+                    <td>{{ obj.d }}</td>
+                    <td>{{ obj.l }}</td>
+                    <td>{{ obj.gf }}</td>
+                    <td>{{ obj.ga }}</td>
+                    <td>{{ obj.gd }}</td>
+                    <td>{{ obj.pts }}</td>
+                    <td>
+                        <div class="form-group  col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">
+                            <h4><a href="{% url 'edit_standings' id=obj.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h4>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group  col-lg-2 col-md-2 nopadding gutter-padding" id="league_end">
+                        <!--<label for="exampleInputFile">Delete</label>-->
+                        <h4><a href="{% url 'delete_standings' id=league.id %}" class="confirm-delete"><i class="fa fa-trash" aria-hidden="true"></i></a></h4>
+                        </div>
+                    </td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
